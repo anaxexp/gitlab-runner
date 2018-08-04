@@ -1,0 +1,16 @@
+language: bash
+
+services:
+  - docker
+
+env:
+  global:
+    - LATEST_TAG=10.5
+  matrix:
+    - GITLAB_RUNNER_VER=10.5.0 TAG=10.5 EXTRA_TAG=10
+
+script:
+  - make && make test
+
+after_success:
+  - bash "${TRAVIS_BUILD_DIR}/travis_release"
